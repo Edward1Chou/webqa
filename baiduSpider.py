@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 泛读模式，提供点赞数最多并且差评数较少的回答
+修改版
 """
 import sys
 import requests
