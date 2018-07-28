@@ -43,7 +43,7 @@ def parse_subweb(url, ques):
     wb_data_sub = requests.get(url_sub)
     wb_data_sub.encoding = ('gbk')
     soup_sub = BeautifulSoup(wb_data_sub.content, 'lxml')
-    best_answer = soup_sub.find('pre', class_="best-text mb-10")
+    best_answer = soup_sub.find('div', class_="best-text mb-10")
     agree_point_p = soup_sub.find('span', class_="iknow-qb_home_icons evaluate evaluate-32 ")
     disagree_point_p = soup_sub.find('span', class_="iknow-qb_home_icons evaluate evaluate-bad evaluate-32 ")
     agree_point = 0
@@ -62,7 +62,7 @@ def parse_subweb(url, ques):
             best = best.strip("展开")
             return best
     else:
-        better_answer = soup_sub.find_all('div', class_="answer-text line")
+        better_answer = soup_sub.find_all('div', class_="answer-text mb-10 line")
 
         if better_answer != None:
             for i_better, better_answer_sub in enumerate(better_answer):
@@ -215,10 +215,10 @@ if __name__ == '__main__':
     start = time.time()
     wq = get_weather.weather_query()
     # question = '三生三世十里桃花女主角是谁？'
-    # question = "海南有哪些美食"
+    question = "海南有哪些美食"
     # question = "海南的著名景点有哪些？"
     # question = "海南夏天的天气一般怎么样？"
-    question = "后天三亚的天气怎么样？"
+    # question = "后天三亚的天气怎么样？"
     # question = "海南冬天的天气一般怎么样？"
     # question = "三亚的机场在哪里？"
     # question = "你好啊"

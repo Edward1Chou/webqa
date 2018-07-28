@@ -48,7 +48,7 @@ def parse_subweb(url, ques):
     wb_data_sub = requests.get(url_sub)
     wb_data_sub.encoding = ('gbk')
     soup_sub = BeautifulSoup(wb_data_sub.content, 'lxml')
-    best_answer = soup_sub.find('pre', class_="best-text mb-10")
+    best_answer = soup_sub.find('div', class_="best-text mb-10")
     agree_point_p = soup_sub.find('span', class_="iknow-qb_home_icons evaluate evaluate-32 ")
     disagree_point_p = soup_sub.find('span', class_="iknow-qb_home_icons evaluate evaluate-bad evaluate-32 ")
     agree_point = 0
@@ -67,7 +67,7 @@ def parse_subweb(url, ques):
             best = best.strip("展开")
             return best
     else:
-        better_answer = soup_sub.find_all('div', class_="answer-text line")
+        better_answer = soup_sub.find_all('div', class_="answer-text mb-10 line")
 
         if better_answer != None:
             for i_better, better_answer_sub in enumerate(better_answer):
