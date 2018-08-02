@@ -225,10 +225,10 @@ if __name__ == '__main__':
     # question = '三生三世十里桃花女主角是谁？'
     # question = "海南有哪些美食"
     # question = "我要去海南旅游，有什么可以建议的吗？"
-    # question = "海南的著名景点有哪些？"
+    question = "海南的著名景点有哪些？"
     # question = "海南夏天的天气一般怎么样？"
     # question = "最近三亚的天气怎么样？"
-    question = "我想吃龙虾"
+    # question = "我想吃龙虾"
     # question = "海南冬天的天气一般怎么样？"
     # question = "三亚的机场在哪里？"
     # question = "你好啊"

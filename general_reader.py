@@ -44,6 +44,10 @@ def match_key_words(main_ques, other):
 
 
 def parse_subweb(url, ques):
+    badwords = []
+    with open("./badwords.txt", 'r', encoding='utf-8') as b:
+        for line in b.readlines():
+            badwords.append(line.strip('\n'))
     url_sub = url.get('href')
     wb_data_sub = requests.get(url_sub)
     wb_data_sub.encoding = ('gbk')
@@ -62,7 +66,9 @@ def parse_subweb(url, ques):
         best = best_answer.get_text(strip=True)
         # 如果问题的关键词，出现在了答案中，则判断是好的回答，改进，可以根据点赞比判断
         # 长度小于100,过滤“展开全部”
-        if match_key_words(ques, best) and len(best) < 1000:
+        contain_badword = [badword for badword in badwords if badword in best]
+        if match_key_words(ques, best) and len(best) < 1000 \
+                and len(contain_badword) == 0:
             best = best.strip("展开全部")
             best = best.strip("展开")
             return best
@@ -72,7 +78,9 @@ def parse_subweb(url, ques):
         if better_answer != None:
             for i_better, better_answer_sub in enumerate(better_answer):
                 better = better_answer_sub.get_text(strip=True)
-                if match_key_words(ques, better) and len(better) < 1000:
+                contain_badword = [badword for badword in badwords if badword in better]
+                if match_key_words(ques, better) and len(better) < 1000 \
+                        and len(contain_badword) == 0:
                     better = better.strip("展开全部")
                     better = better.strip("展开")
                     return better
