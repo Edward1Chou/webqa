@@ -96,10 +96,12 @@ class weather_query():
         return star_indexs
 
     def __show_weather(self, star_lists):
-        print("***************** %s近十五天的天气如下：*************\n\n" % self.city_n)
+        ret_str = ""
+        ret_str += "***************** %s最近的天气如下：*************\n\n" % self.city_n
         for re in star_lists:
-            print("星期：" + re['week'] + "    日期：" + re['data'] + "   天气：" + re['weather'])
+            ret_str += "星期：" + re['week'] + "    日期：" + re['data'] + "   天气：" + re['weather'] + "\n"
             # print(rs)
+        return ret_str
 
     def __show_index(self, star_indexs):
         print("*****************  两天指数及建议： ****************\n")
@@ -144,6 +146,8 @@ class weather_query():
             weather_weeks = self.__analyze(1, html)
             star_lists = self.__analyze_weather(weather_weeks)
             flag = 0
+            if date == "999":
+                return self.__show_weather(star_lists)
             for ret in star_lists:
                 # if date == ret["week"] or date == ret["data"]:
                 if date == ret["data"][1:-1]:
@@ -226,7 +230,7 @@ class weather_query():
                     tmp_day = 5 - weekday_num
                 if "六" in item:
                     tmp_day = 6 - weekday_num
-                if "日" in item or "天" in item:
+                if "日" in item or "天" in item or "末" in item:
                     tmp_day = 7 - weekday_num
                 if "下" in item:
                     tmp_day += 7
@@ -250,6 +254,8 @@ class weather_query():
                     city_name = city_tmp
             elif item.strip("市") in dic.keys():
                 city_name = item
+        if "最近" in input_str or "几天" in input_str or "一周" in input_str:
+            date = "999"
         return date, city_name
 
 
